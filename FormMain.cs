@@ -22,6 +22,7 @@ namespace QuanLyBanHangNho
         private readonly Color C_DIVIDER = Color.FromArgb(235, 235, 235);
 
         private readonly Panel pnlIconBar = new();
+        private readonly Panel pnlMainContainer = new();
         private readonly Panel pnlSubMenu = new();
         private readonly Panel pnlContent = new();
         private readonly Panel pnlTopBar = new();
@@ -49,7 +50,6 @@ namespace QuanLyBanHangNho
             pnlIconBar.Height = 60;
             pnlIconBar.BackColor = C_TOPBAR_BG;
             pnlIconBar.BorderStyle = BorderStyle.FixedSingle;
-            pnlIconBar.AutoScroll = true;
 
             var pnlLogo = new Panel { Dock = DockStyle.Left, Width = 60, BackColor = C_TOPBAR_BG };
             pnlLogo.Controls.Add(new Label { Text = "🏪", Font = new Font("Segoe UI", 24), ForeColor = C_ICON_ACTIVE, Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleCenter });
@@ -58,7 +58,17 @@ namespace QuanLyBanHangNho
             var pnlDivider = new Panel { Dock = DockStyle.Left, Width = 1, BackColor = C_DIVIDER };
             pnlIconBar.Controls.Add(pnlDivider);
 
+            AddIconBtn("📊", "hanghoa");
+            AddIconBtn("👤", "banhang");
+            AddIconBtn("📤", "nhaphang");
+            AddIconBtn("👥", "khachhang");
+            AddIconBtn("👨", "nhanvien");
+            AddIconBtn("📈", "baocao");
+
             Controls.Add(pnlIconBar);
+
+            pnlMainContainer.Dock = DockStyle.Fill;
+            pnlMainContainer.BackColor = C_CONTENT_BG;
 
             pnlSubMenu.Dock = DockStyle.Left;
             pnlSubMenu.Width = 220;
@@ -75,7 +85,7 @@ namespace QuanLyBanHangNho
             pnlSubHeader.Controls.Add(lblSubTitle);
             pnlSubMenu.Controls.Add(pnlSubHeader);
 
-            Controls.Add(pnlSubMenu);
+            pnlMainContainer.Controls.Add(pnlSubMenu);
 
             pnlContent.Dock = DockStyle.Fill;
             pnlContent.BackColor = C_CONTENT_BG;
@@ -95,14 +105,9 @@ namespace QuanLyBanHangNho
             pnlContentHost.BackColor = Color.Transparent;
             pnlContent.Controls.Add(pnlContentHost);
             pnlContent.Controls.Add(pnlTopBar);
-            Controls.Add(pnlContent);
 
-            AddIconBtn("📊", "hanghoa");
-            AddIconBtn("👤", "banhang");
-            AddIconBtn("📤", "nhaphang");
-            AddIconBtn("👥", "khachhang");
-            AddIconBtn("👨", "nhanvien");
-            AddIconBtn("📈", "baocao");
+            pnlMainContainer.Controls.Add(pnlContent);
+            Controls.Add(pnlMainContainer);
         }
 
         private void AddIconBtn(string icon, string key)
