@@ -101,16 +101,21 @@ namespace QuanLyBanHangNho.Forms.HangHoa
             UI.MakeStat(statCard, "|", string.Empty, 360);
             lblCanhBao = UI.MakeStat(statCard, "0", "Sắp hết hàng (≤10)", 380);
 
-            var lblTitle = new Label
+            var titleContainer = new Panel
+            {
+                Dock = DockStyle.Top,
+                Height = 40,
+                BackColor = UI.White
+            };
+            titleContainer.Controls.Add(new Label
             {
                 Text = "Danh sách hàng hóa",
                 Location = new Point(10, 10),
                 AutoSize = true,
                 Font = new Font("Segoe UI", 11, FontStyle.Bold),
-                ForeColor = UI.Dark,
-                Anchor = AnchorStyles.Top | AnchorStyles.Left
-            };
-            rightPanel.Controls.Add(lblTitle);
+                ForeColor = UI.Dark
+            });
+            rightPanel.Controls.Add(titleContainer);
 
             dgv = new DataGridView
             {
@@ -129,8 +134,7 @@ namespace QuanLyBanHangNho.Forms.HangHoa
                 AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None,
                 Font = new Font("Segoe UI", 9.5f),
                 CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal,
-                EnableHeadersVisualStyles = false,
-                Margin = new Padding(0, 40, 0, 0)
+                EnableHeadersVisualStyles = false
             };
 
             dgv.ColumnHeadersDefaultCellStyle.BackColor = UI.Bg;
