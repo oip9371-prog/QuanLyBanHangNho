@@ -49,7 +49,7 @@ namespace QuanLyBanHangNho.Forms.HangHoa
             {
                 Dock = DockStyle.Fill,
                 BackColor = UI.White,
-                Padding = new Padding(20)
+                Padding = new Padding(10)
             };
             contentContainer.Controls.Add(rightPanel);
 
@@ -101,18 +101,51 @@ namespace QuanLyBanHangNho.Forms.HangHoa
             UI.MakeStat(statCard, "|", string.Empty, 360);
             lblCanhBao = UI.MakeStat(statCard, "0", "Sắp hết hàng (≤10)", 380);
 
-            rightPanel.Controls.Add(new Label
+            var lblTitle = new Label
             {
                 Text = "Danh sách hàng hóa",
-                Location = new Point(18, 18),
+                Location = new Point(10, 10),
                 AutoSize = true,
                 Font = new Font("Segoe UI", 11, FontStyle.Bold),
                 ForeColor = UI.Dark,
                 Anchor = AnchorStyles.Top | AnchorStyles.Left
-            });
+            };
+            rightPanel.Controls.Add(lblTitle);
 
-            dgv = UI.MakeDgv(rightPanel, 18, 52, 1000, 580);
-            dgv.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgv = new DataGridView
+            {
+                Dock = DockStyle.Fill,
+                ReadOnly = true,
+                AllowUserToAddRows = false,
+                AllowUserToDeleteRows = false,
+                MultiSelect = false,
+                SelectionMode = DataGridViewSelectionMode.FullRowSelect,
+                BackgroundColor = UI.White,
+                BorderStyle = BorderStyle.None,
+                GridColor = Color.FromArgb(241, 245, 249),
+                RowHeadersVisible = false,
+                AutoGenerateColumns = true,
+                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells,
+                AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None,
+                Font = new Font("Segoe UI", 9.5f),
+                CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal,
+                EnableHeadersVisualStyles = false,
+                Margin = new Padding(0, 40, 0, 0)
+            };
+
+            dgv.ColumnHeadersDefaultCellStyle.BackColor = UI.Bg;
+            dgv.ColumnHeadersDefaultCellStyle.ForeColor = UI.Muted;
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+            dgv.ColumnHeadersHeight = 36;
+            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgv.RowTemplate.Height = 38;
+            dgv.DefaultCellStyle.Padding = new Padding(8, 0, 0, 0);
+            dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(239, 246, 255);
+            dgv.DefaultCellStyle.SelectionForeColor = UI.Dark;
+            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 252, 255);
+
+            rightPanel.Controls.Add(dgv);
+
             dgv.DoubleClick += (s, e) =>
             {
                 var maHH = GetSelectedMaHH();
