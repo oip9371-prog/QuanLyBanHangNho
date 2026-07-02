@@ -6,7 +6,7 @@ namespace QuanLyBanHangNho
 {
     public class FormMain : Form
     {
-        private readonly Color C_SIDEBAR_BG = Color.FromArgb(245, 245, 245);
+        private readonly Color C_TOPBAR_BG = Color.FromArgb(245, 245, 245);
         private readonly Color C_ICON_BG = Color.FromArgb(237, 237, 237);
         private readonly Color C_ICON_ACTIVE = Color.FromArgb(0, 173, 239);
         private readonly Color C_ICON_HOVER = Color.FromArgb(230, 230, 230);
@@ -14,7 +14,7 @@ namespace QuanLyBanHangNho
         private readonly Color C_SUBMENU_HOVER = Color.FromArgb(245, 245, 245);
         private readonly Color C_SUBMENU_ACTIVE = Color.FromArgb(230, 244, 255);
         private readonly Color C_SUBMENU_BORDER = Color.FromArgb(0, 173, 239);
-        private readonly Color C_TOPBAR_BG = Color.White;
+        private readonly Color C_CONTENT_TOPBAR = Color.White;
         private readonly Color C_CONTENT_BG = Color.FromArgb(250, 250, 250);
         private readonly Color C_TEXT_PRIMARY = Color.FromArgb(30, 30, 30);
         private readonly Color C_TEXT_SECONDARY = Color.FromArgb(120, 120, 120);
@@ -45,14 +45,20 @@ namespace QuanLyBanHangNho
             BackColor = C_CONTENT_BG;
             Font = new Font("Segoe UI", 9.5f);
 
-            pnlIconBar.Dock = DockStyle.Left;
-            pnlIconBar.Width = 70;
-            pnlIconBar.BackColor = C_SIDEBAR_BG;
+            pnlIconBar.Dock = DockStyle.Top;
+            pnlIconBar.Height = 60;
+            pnlIconBar.BackColor = C_TOPBAR_BG;
             pnlIconBar.BorderStyle = BorderStyle.FixedSingle;
+            pnlIconBar.AutoScroll = true;
 
-            var pnlLogo = new Panel { Dock = DockStyle.Top, Height = 60, BackColor = C_SIDEBAR_BG };
+            var pnlLogo = new Panel { Dock = DockStyle.Left, Width = 60, BackColor = C_TOPBAR_BG };
             pnlLogo.Controls.Add(new Label { Text = "🏪", Font = new Font("Segoe UI", 24), ForeColor = C_ICON_ACTIVE, Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleCenter });
             pnlIconBar.Controls.Add(pnlLogo);
+
+            var pnlDivider = new Panel { Dock = DockStyle.Left, Width = 1, BackColor = C_DIVIDER };
+            pnlIconBar.Controls.Add(pnlDivider);
+
+            Controls.Add(pnlIconBar);
 
             pnlSubMenu.Dock = DockStyle.Left;
             pnlSubMenu.Width = 220;
@@ -69,7 +75,6 @@ namespace QuanLyBanHangNho
             pnlSubHeader.Controls.Add(lblSubTitle);
             pnlSubMenu.Controls.Add(pnlSubHeader);
 
-            Controls.Add(pnlIconBar);
             Controls.Add(pnlSubMenu);
 
             pnlContent.Dock = DockStyle.Fill;
@@ -77,7 +82,7 @@ namespace QuanLyBanHangNho
 
             pnlTopBar.Dock = DockStyle.Top;
             pnlTopBar.Height = 60;
-            pnlTopBar.BackColor = C_TOPBAR_BG;
+            pnlTopBar.BackColor = C_CONTENT_TOPBAR;
             pnlTopBar.BorderStyle = BorderStyle.FixedSingle;
             lblTopTitle.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             lblTopTitle.ForeColor = C_TEXT_PRIMARY;
@@ -104,11 +109,11 @@ namespace QuanLyBanHangNho
         {
             var pnl = new Panel
             {
-                Size = new Size(70, 70),
+                Size = new Size(70, 60),
                 BackColor = C_ICON_BG,
                 Cursor = Cursors.Hand,
                 Tag = key,
-                Dock = DockStyle.Top,
+                Dock = DockStyle.Left,
                 Margin = new Padding(0)
             };
 
