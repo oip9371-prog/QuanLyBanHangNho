@@ -17,11 +17,11 @@ namespace QuanLyBanHangNho.Forms.HangHoa
         {
             Text = "Quản lý hàng hóa";
             BackColor = UI.Bg;
-            AutoScroll = true;
-            AutoScrollMinSize = new Size(1100, 800);
             Padding = new Padding(0);
             MinimumSize = new Size(920, 700);
             AutoScaleMode = AutoScaleMode.Dpi;
+
+            var mainContainer = new Panel { Dock = DockStyle.Fill, BackColor = UI.Bg };
 
             var header = new Panel { Dock = DockStyle.Top, Height = 70, BackColor = UI.White };
             header.Controls.Add(new Label
@@ -32,7 +32,9 @@ namespace QuanLyBanHangNho.Forms.HangHoa
                 Location = new Point(20, 12),
                 AutoSize = true
             });
-            Controls.Add(header);
+            mainContainer.Controls.Add(header);
+
+            var contentContainer = new Panel { Dock = DockStyle.Fill, BackColor = UI.Bg };
 
             var leftPanel = new Panel
             {
@@ -41,15 +43,18 @@ namespace QuanLyBanHangNho.Forms.HangHoa
                 BackColor = UI.White,
                 AutoScroll = true
             };
-            Controls.Add(leftPanel);
+            contentContainer.Controls.Add(leftPanel);
 
             var rightPanel = new Panel
             {
                 Dock = DockStyle.Fill,
                 BackColor = UI.White,
-                Padding = new Padding(16)
+                Padding = new Padding(20)
             };
-            Controls.Add(rightPanel);
+            contentContainer.Controls.Add(rightPanel);
+
+            mainContainer.Controls.Add(contentContainer);
+            Controls.Add(mainContainer);
 
             leftPanel.Controls.Add(new Label
             {
@@ -106,7 +111,7 @@ namespace QuanLyBanHangNho.Forms.HangHoa
                 Anchor = AnchorStyles.Top | AnchorStyles.Left
             });
 
-            dgv = UI.MakeDgv(rightPanel, 18, 52, 664, 580);
+            dgv = UI.MakeDgv(rightPanel, 18, 52, 1000, 580);
             dgv.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgv.DoubleClick += (s, e) =>
             {
